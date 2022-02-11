@@ -1362,7 +1362,7 @@ declare class Server {
       "static-directory": {
         configs: {
           type: string;
-          multiple: boolean;
+          /** @type {ServerOptions} */ multiple: boolean;
           description: string;
           path: string;
         }[];
@@ -1389,7 +1389,7 @@ declare class Server {
           path: string;
         }[];
         description: string;
-        simpleType: string;
+        /** @type {any} */ simpleType: string;
         multiple: boolean;
       };
       "static-reset": {
@@ -2383,7 +2383,6 @@ declare class Server {
                       instanceof?: undefined;
                     }
                   | {
-                      /** @type {any} */
                       instanceof: string;
                       type?: undefined;
                     }
@@ -2391,11 +2390,11 @@ declare class Server {
               };
             }
         )[];
-        /** @type {any} */
         description: string;
         link: string;
       };
       Server: {
+        /** @type {any} */
         anyOf: {
           $ref: string;
         }[];
@@ -2413,6 +2412,10 @@ declare class Server {
       };
       ServerString: {
         type: string;
+        /**
+         * @private
+         * @returns {Compiler["options"]}
+         */
         minLength: number;
         cli: {
           exclude: boolean;
@@ -2428,10 +2431,11 @@ declare class Server {
           };
           options: {
             $ref: string;
-          } /** @type {MultiCompiler} */;
+          };
         };
-        /** @type {MultiCompiler} */ additionalProperties: boolean;
+        additionalProperties: boolean /** @type {MultiCompiler} */;
       };
+      /** @type {MultiCompiler} */
       ServerOptions: {
         type: string;
         additionalProperties: boolean;
@@ -2837,7 +2841,6 @@ declare class Server {
               enum?: undefined;
             }
         )[];
-        /** @type {ServerOptions} */
         cli: {
           description: string;
         };
@@ -2847,7 +2850,6 @@ declare class Server {
       };
       WebSocketServerObject: {
         type: string;
-        /** @type {ServerOptions} */
         properties: {
           type: {
             anyOf: {
@@ -2857,6 +2859,7 @@ declare class Server {
           options: {
             type: string;
             additionalProperties: boolean;
+            /** @type {ServerOptions} */
             cli: {
               exclude: boolean;
             };
@@ -2872,7 +2875,7 @@ declare class Server {
     additionalProperties: boolean;
     properties: {
       allowedHosts: {
-        $ref: string;
+        $ref: string /** @type {ServerOptions} */;
       };
       bonjour: {
         $ref: string;
@@ -2898,9 +2901,11 @@ declare class Server {
       hot: {
         $ref: string;
       };
+      /** @type {any} */
       http2: {
-        $ref: string;
+        $ref: string /** @type {ServerOptions} */;
       };
+      /** @type {ServerOptions} */
       https: {
         $ref: string;
       };
@@ -2917,7 +2922,7 @@ declare class Server {
         $ref: string;
       };
       onBeforeSetupMiddleware: {
-        $ref: string /** @type {any} */;
+        $ref: string;
       };
       onListening: {
         $ref: string;
